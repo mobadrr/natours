@@ -24,7 +24,9 @@ export const updateSettings = async (data, type) => {
   } catch (err) {
     showAlert(
       'error',
-      err.response?.data?.message || err.message
+      err.response && err.response.data
+        ? err.response.data.message
+        : err.message
     );
   }
 };

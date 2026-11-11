@@ -6,6 +6,7 @@ const rateLimit = require('express-rate-limit');
 const mongoSantitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -17,6 +18,7 @@ const viewRouter = require('./routes/viewsRoutes');
 const { title } = require('process');
 
 const app = express();
+app.enable('trust proxy');
 
 app.set('view engine', 'pug');
 
@@ -97,6 +99,7 @@ app.use(
   })
 );
 
+app.use(compression());
 //serving static files
 
 //test middleware

@@ -20,7 +20,10 @@ export const login = async (email, password) => {
   } catch (err) {
     showAlert(
       'error',
-      err.response?.data?.message || err.message
+      (err.response &&
+        err.response.data &&
+        err.response.data.message) ||
+        err.message
     );
   }
 };
